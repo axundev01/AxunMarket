@@ -2,7 +2,7 @@ package com.axun.market.web.controller;
 
 import com.axun.market.domain.dto.AuthenticationRequest;
 import com.axun.market.domain.dto.AuthenticationResponse;
-import com.axun.market.domain.service.PlatziUserDetailsService;
+import com.axun.market.domain.service.AxunUserDetailsService;
 import com.axun.market.web.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PlatziUserDetailsService platziUserDetailsService;
+    private AxunUserDetailsService axunUserDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -33,7 +33,7 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> createToken(@RequestBody AuthenticationRequest request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-            UserDetails userDetails = platziUserDetailsService.loadUserByUsername(request.getUsername());
+            UserDetails userDetails = axunUserDetailsService.loadUserByUsername(request.getUsername());
             String jwt = jwtUtil.generateToken(userDetails);
 
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);

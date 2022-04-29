@@ -1,6 +1,6 @@
 package com.axun.market.web.security;
 
-import com.axun.market.domain.service.PlatziUserDetailsService;
+import com.axun.market.domain.service.AxunUserDetailsService;
 import com.axun.market.web.security.filter.JwtFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +16,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private PlatziUserDetailsService platziUserDetailsService;
+    private AxunUserDetailsService axunUserDetailsService;
 
     @Autowired
     private JwtFilterRequest jwtFilterRequest;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(platziUserDetailsService);
+        auth.userDetailsService(axunUserDetailsService);
     }
 
     @Override
